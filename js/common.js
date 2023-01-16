@@ -25,4 +25,16 @@ jQuery( document ).ready(function( $ ) {
       Ps.initialize(document.getElementById('sidebar'));
     });
 
+
+    $('.btn-submit').on('click', function(){
+        $.ajax({
+            url: "/api/test",
+            type: "get",
+            data: "test",
+            success: function(e){
+                alert(e);
+            }
+        });
+    });
 });
+
