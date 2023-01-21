@@ -28,7 +28,7 @@ jQuery( document ).ready(function( $ ) {
 
     $('.btn-submit').on('click', function(){
         $.ajax({
-            url: "/api/test",
+            url: "/test",
             type: "get",
             data: "test",
             success: function(e){
