@@ -50,26 +50,20 @@
   });
 
   function php_email_form_submit(thisForm, action, formData) {
-    fetch(action, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        "Content-Type": "application/json",
-        'X-Requested-With': 'XMLHttpRequest'
-      }
-    })
-    .then(response => {
-      return response.text();
+    axios({
+      url: action, // 통신할 웹문서
+      method: 'POST', // 통신할 방식
+      data: formData
     })
     .then(data => {
-      thisForm.querySelector('.loading').classList.remove('d-block');
-      if (data.trim() == 'OK') {
-        thisForm.querySelector('.sent-message').classList.add('d-block');
-        thisForm.reset(); 
-      } else {
-        throw new Error(data ? data : 'Form submission failed and no error message returned from: ' + action); 
-      }
-    })
+        thisForm.querySelector('.loading').classList.remove('d-block');
+        if (data.data.result == 'success') {
+          thisForm.querySelector('.sent-message').classList.add('d-block');
+          thisForm.reset();
+        } else {
+          throw new Error(data ? data : 'Form submission failed and no error message returned from: ' + action);
+        }
+      })
     .catch((error) => {
       displayError(thisForm, error);
     });
