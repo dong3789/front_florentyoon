@@ -53,7 +53,10 @@
     fetch(action, {
       method: 'POST',
       body: formData,
-      headers: {'X-Requested-With': 'XMLHttpRequest'}
+      headers: {
+        "Content-Type": "application/json",
+        'X-Requested-With': 'XMLHttpRequest'
+      }
     })
     .then(response => {
       return response.text();
